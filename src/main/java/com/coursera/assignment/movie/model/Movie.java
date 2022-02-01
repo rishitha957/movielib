@@ -15,13 +15,22 @@ public class Movie {
     @Column
     private String name;
 
+    @ManyToMany
+    @JoinTable(
+            name = "movie_cast",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id")
+    )
     @Column
-    private String genre;
+    private List<Actor> movieCast;
 
-//    private Actor actor;
-//    Actor actress;
     @Column
     private double rating;
+
+    @ManyToOne
+    @JoinColumn(name = "movies_genre")
+    private Genre movieGenre;
+
 
     public Movie(){
         //For Persistence
@@ -39,13 +48,6 @@ public class Movie {
         this.name = name;
     }
 
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
 
     public double getRating() {
         return rating;
@@ -54,4 +56,13 @@ public class Movie {
     public void setRating(double rating) {
         this.rating = rating;
     }
+
+    public Genre getMovieGenre() {
+        return movieGenre;
+    }
+
+    public void setMovieGenre(Genre movieGenre) {
+        this.movieGenre = movieGenre;
+    }
+
 }
